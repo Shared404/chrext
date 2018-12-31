@@ -1,0 +1,36 @@
+#! /usr/bin/env python2
+'''
+Will filter any lowercase or uppercase letters out from a block of text.
+It works by converting string to list and list values from string to 
+unicode. It will then move any unicode characters falling into the values
+for American English letters to a new list, which has it's values converted
+back to strings, and gets join()'d back into a string 
+'''
+def charExt(instring):
+	#convert string to list
+	instring = list(instring)
+	#convert string values in list to unicode
+	i = 0
+	for i in range(len(instring)):
+		instring[i] = ord(instring[i])
+	#create newList and iterate through instring, moving any letters 
+	#into the newList
+	newList = []
+	i = 0
+	for i in range(len(instring)):
+		if instring[i] >= 97 and instring[i] <= 122:
+				newList.append(instring[i])
+		if instring[i] >= 65 and instring[i] <= 90:
+			newList.append(instring[i])
+	#change newList values back to strings
+	i = 0
+	for i in range(len(newList)):
+		newList[i] = chr(newList[i])
+	#join the list and print the string
+	outstring = ''.join(newList)
+	print(outstring)
+
+#open the file and call the function
+wantedfile = raw_input("File> ")
+f = open(wantedfile, "r")
+charExt(f.read())
